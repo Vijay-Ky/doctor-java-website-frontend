@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Auth Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"/>  
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/loginSignup.css">
+
+</head>
+<body>
+
+
+
+    <div class="auth-container">
+        <div class="auth-header">
+            <span class="auth-header-text" id="login-text">LOG IN</span>
+            <span class="auth-header-text" id="signup-text">SIGN UP</span>
+        </div>
+        
+        <div class="auth-toggle-container">
+            <input type="checkbox" id="auth-toggle" class="auth-toggle-input">
+            <label for="auth-toggle" class="auth-toggle-label"></label>
+        </div>
+
+        <div class="auth-cards">
+            <div class="auth-card-inner">
+                <!-- Login Form -->
+                <div class="auth-card auth-login">
+                    <h2 class="auth-title">Log In</h2>
+                    <div class="auth-form">
+                        <div class="input-group">
+                            <span class="input-icon">@</span>
+                            <input type="email" placeholder="Your Email" class="auth-input" id="logemail">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" placeholder="Your Password" class="auth-input" id="logpass">
+                        </div>
+                        <button class="auth-button" id="login-btn">LOGIN</button>
+                        <p class="auth-footer">Forgot your password?</p>
+                    </div>
+                </div>
+
+                <!-- Signup Form -->
+                <div class="auth-card auth-signup">
+                    <h2 class="auth-title">Sign Up</h2>
+                    <div class="auth-form">
+                        <div class="input-group">
+                            <span class="input-icon">👤</span>
+                            <input type="text" placeholder="Your Full Name" class="auth-input" id="signupname">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-icon">@</span>
+                            <input type="email" placeholder="Your Email" class="auth-input" id="signupemail">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" placeholder="Your Password" class="auth-input" id="signuppass">
+                        </div>
+                        <button class="auth-button" id="signup-btn">SIGNUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleCheckbox = document.getElementById('auth-toggle');
+            const loginText = document.getElementById('login-text');
+            const signupText = document.getElementById('signup-text');
+            const loginForm = document.querySelector('.auth-login');
+            const signupForm = document.querySelector('.auth-signup');
+
+            // Toggle forms based on checkbox state
+            toggleCheckbox.addEventListener('change', () => {
+                if (toggleCheckbox.checked) {
+                    // Switch to signup form
+                    loginForm.style.transform = "rotateY(180deg)";
+                    signupForm.style.transform = "rotateY(0deg)";
+                    loginText.style.color = "#fff";
+                    signupText.style.color = "#d4af37";
+                } else {
+                    // Switch to login form
+                    loginForm.style.transform = "rotateY(0deg)";
+                    signupForm.style.transform = "rotateY(180deg)";
+                    loginText.style.color = "#d4af37";
+                    signupText.style.color = "#fff";
+                }
+            });
+
+            // Handle login form submission
+            document.getElementById('login-btn').addEventListener('click', () => {
+                const email = document.getElementById('logemail').value;
+                const password = document.getElementById('logpass').value;
+                console.log('Login attempt:', { email, password });
+            });
+
+            // Handle signup form submission
+            document.getElementById('signup-btn').addEventListener('click', () => {
+                const name = document.getElementById('signupname').value;
+                const email = document.getElementById('signupemail').value;
+                const password = document.getElementById('signuppass').value;
+                console.log('Signup attempt:', { name, email, password });
+            });
+
+            // Handle clicks on login/signup texts
+            loginText.addEventListener('click', () => {
+                toggleCheckbox.checked = false;
+                // Switch to login form when login text is clicked
+                loginForm.style.transform = "rotateY(0deg)";
+                signupForm.style.transform = "rotateY(180deg)";
+                loginText.style.color = "#d4af37";
+                signupText.style.color = "#fff";
+            });
+
+            signupText.addEventListener('click', () => {
+                toggleCheckbox.checked = true;
+                // Switch to signup form when signup text is clicked
+                loginForm.style.transform = "rotateY(180deg)";
+                signupForm.style.transform = "rotateY(0deg)";
+                loginText.style.color = "#fff";
+                signupText.style.color = "#d4af37";
+            });
+        });
+    </script>
+</body>
+</html>
